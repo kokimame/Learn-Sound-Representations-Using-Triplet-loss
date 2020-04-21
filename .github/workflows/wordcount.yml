@@ -31,6 +31,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     # Runs a set of commands using the runners shell
+        # Previously used to install pdftotext
         # sudo apt-get install libpoppler-cpp-dev pkg-config
         # python -m pip install --upgrade pip
         # pip install pdftotext
@@ -47,4 +48,4 @@ jobs:
     - name: Count the number of words in the main PDF
       run: |
         words=$(pdftotext $MAINTITLE.pdf - | wc -w),
-        echo Currently $words in MAINTITLE.pdf💪
+        echo Currently $words in $MAINTITLE.pdf💪
