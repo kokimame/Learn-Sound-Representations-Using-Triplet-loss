@@ -47,5 +47,5 @@ jobs:
         fi
     - name: Count the number of words in the main PDF
       run: |
-        words=$(pdftotext $MAINTITLE.pdf - | wc -w),
-        echo Currently $words in $MAINTITLE.pdf💪
+        words=$(pdftotext $MAINTITLE.pdf - | wc -w )
+        echo Currently, $words words in $MAINTITLE.pdf💪
