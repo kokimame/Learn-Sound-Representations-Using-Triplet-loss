@@ -31,12 +31,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     # Runs a set of commands using the runners shell
+        # sudo apt-get install libpoppler-cpp-dev pkg-config
+        # python -m pip install --upgrade pip
+        # pip install pdftotext
     - name: Install pdftotext
-      run: | 
-        sudo apt-get install libpoppler-cpp-dev pkg-config
+      run: |
         sudo apt-get install poppler-utils
-        python -m pip install --upgrade pip
-        pip install pdftotext
     - name: Check if the main PDF is attached to the push
       run: | 
         if [ -f "$MAINTITLE.pdf" ]; then
