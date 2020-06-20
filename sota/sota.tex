@@ -9,11 +9,12 @@
 In the last chapter, we saw information technology has a decisive role in shaping our society as well as some breakthroughs of the technology that altered how we manage, retrieve and distribute information and critically changed our way of thinking and living. The advancements in information technology is an ongoing central force of digital innovation in today's society. Yet we think there are a plenty of opportunities left behind. This chapter encompasses this long-running technological advances from the past, making readers certain of the state-of-the-art studies that are relevant to our work, and shows how seamlessly our methodology will progress from the current point in the next chapter. 
 
 As seen in the introduction, information technology can mean any kind of systems for storing, retrieving, and sending information. In this work, we focus exclusively on information technology which deal with information that are processed and structured from audio data. 
-With our subsequent methodology, more specifically, we aim to improve an content-based audio search system which allows people to access sounds efficiently and intuitively by looking inside a cluster of sounds grouped by content similarity instead of examining a linear list of sounds.
-To achieve this, we think of two independent issues which are equally important: the way of representing sounds (production of audio features) and the way of presenting sounds based on the given representation (clustering approach). We discuss these two issues in the context of an information retrieval process which begins when a user enters a query for sounds into the system and finds matching objects. There is no doubt that such a system greatly helps people's search for digital sounds on the internet which is increasingly daunting because of the information overload we discussed in the last chapter.
+More specifically, with our proposed methodology, we contribute to the research of content-based audio retrieval which allows people to access sounds efficiently and intuitively by looking inside a cluster of sounds grouped by content-based similarity instead of examining a linear list of audio content.
+To achieve this, we think of two independent issues which are equally important: the way of representing sounds (production of audio features) and the way of presenting sounds based on the given representation (clustering approach). We discuss these two issues in the context of an information retrieval process.% which begins when a user enters a query for sounds into the system and finds matching objects. There is no doubt that such a system greatly helps people's search for digital sounds on the internet which is increasingly daunting because of the information overload we discussed in the last chapter.
 
 
-The following sections offer a collection of the most up-to-date work and ideas regarding audio retrieval and not be filled with a mere assortment of details about related new techniques. We give a special importance to the context of why an effort of research or development was made and what problem did it try to address. In this way, we might have to give up some trivial facts and details of the topic, but we believe it is inevitable so that readers can focus on a contiguous progression of previous development toward our proposed method in the next chapter. Each of the following sections is dedicated to a fundamental technique of our methodology. Therefore, readers can get to know the state-of-the-art of each technique and, by the end of chapter, will be all ready for the discussion of our experiments and analysis.
+The following sections offer a collection of the most up-to-date work and ideas regarding audio retrieval and not be filled with a mere assortment of details about related new techniques. We give a special importance to the context of why an effort of research or development was made and what problem did it try to address. In this way, we might have to give up some trivial facts and details of the topic, but we believe it is inevitable so that readers can focus on a contiguous progression of previous development toward our proposed method in the next chapter. Each of the following sections is dedicated to a fundamental technique of our methodology. 
+%Therefore, readers can get to know the state-of-the-art of each technique and, by the end of chapter, will be all ready for the discussion of our experiments and analysis.
 
 %to understand how seamlessly our work aims to advance from the current state-of-the-art.
 
@@ -27,13 +28,13 @@ The rest of this chapter is organized as follows: in the next section, we discus
 \end{figure}
 
 \section{Information Retrieval and Audio}
-The purpose of this section is to emphasize that our work lies at an intersection of information retrieval (IR) and audio engineering problems, pointing out a close relationship between IR systems and audio engineering with examples. We introduce fundamental technologies that are essential to modern IR process such as database technology. Also a number of terminologies used in the IR research, which appear thoroughly in the following sections, are carefully introduced since those may not be clear for readers from audio engineering fields.
+The purpose of this section is to emphasize that our work lies at an intersection of information retrieval (IR) and audio engineering problems, pointing out a close relationship between IR systems and audio engineering with examples. We introduce fundamental technologies that are essential to modern IR process such as database technology. Also a number of terminologies used in the IR research, which appear thoroughly in the following sections, are carefully introduced since those may not be clear for readers from audio engineering backgrounds.
 
 \subsection{Information Retrieval}
 
 Information retrieval is the science of finding information that satisfies an information need from a large collection of those resources~\cite{manning2008}. Most IR systems start off by taking as input a text, a search query which describes user's information needs formally or informally, for example search keywords for web search engines. Then, given a query, the system ranks the data objects which are represented by information in the database. The rank of relevance between the query and each object is measured using a numeric score on how well the object matches with the query~\cite{guandong2010}. Then, it shows the top ranking objects to the user. While traditionally IR is used to mean searching for documents (an unstructured text data) from a collection of other documents in computers~\cite{manning2008}, IR is becoming the dominant form of any kind of information access. Today, the objects that IR systems deal with are not only texts but a wide variety of multimedia data are also supported such as images~\cite{abby2000} and sound~\cite{jonathan1999}, and the retrieval process can be performed using either full-text query or content-based query~\cite{lew2006}.
 
-Techniques and algorithms which enable efficient retrieval process vary with the kind of information to search for. For example, Music Information Retrieval (MIR), which is a branch of IR and deeply related to our work, focuses on retrieving information from music. Since our work focuses on the research and development of content-based audio retrieval which aim to deal with a various types of sounds, including artificially-created sounds such as music loops, we will come back to this topic and discuss advances in techniques and knowledge of the MIR research. 
+Techniques and algorithms which enable efficient retrieval process vary with the kind of information to search for. For example, Music Information Retrieval (MIR), which is a branch of IR and deeply related to our work, focuses on retrieving information from music. Since our work focuses on the research and development of content-based audio retrieval which aim to deal with a various types of sounds, including artificially-created sounds such as music loops, we will come back to this topic (see Section~\ref{sec:mir}) and discuss advances in techniques and knowledge of the MIR research. 
 
 \subsection{Database System}
 As already mentioned, database system is one of the underlying technologies in IR.  It is employed in any kind of web-based applications~\cite{williams2004} and makes possible an satisfying IR experience on the internet . However, database searching itself is not considered as IR because it lacks the ranking process of the search results~\cite{jansen2010}. This means an IR system returns the results which may or may not match the query in the order of relevance while typically a database system returns nothing when no matching object is available in its data collection. Furthermore, an IR system does not limit the user to a specific query language while such languages like SQL or MongoDB are commonly used in database systems~\cite{karan2017}.
@@ -44,20 +45,21 @@ Considering different concerns, a website is usually separated into two independ
 
 What's often left invisible and unknown to the public is a large number of server-side processes running in the back end. Through front end interfaces, users can communicate with the server of a website and properly command them to return the data they look for. Efficiency of the back end system highly affects the performance of the front end activity. Indeed, even basic user experience such as authentication and permission, requires communicating and retrieving data stored in server-side database systems. As such, the database for the website is placed and accessed in the back end.
 
-\subsubsection{Database in practice \texttt{<in progress>}}
+\subsubsection{Database in practice}
 A database system and a file system have some functions in common and the similarity of two systems may confuse some readers. Practically, both system store the data in files: a database system stores data with predefined data formats in a table and a file system stores data (the pointers which indicate where and what data is stored in a hardware storage).
 
-About SQL and NoSQL for querying
+% Maybe About SQL and NoSQL for querying
 
-About RAID6 for secure database
+% Maybe About RAID6 for secure database
 
-About how data is typically organized, not nested much
+% Maybe About how data is typically organized, not nested much
 
 
 
-\subsection{Multimedia Information Retrieval \texttt{<in progress>}}
+\subsection{Multimedia Information Retrieval}
+\label{sec:mir}
 
-\subsection{Freesound \texttt{<in progress>}}
+\subsection{Freesound}
 Freesound\footnote{https://freesound.org/} is a non-profit organization which hosts a collaborative web-based repository of Creative Commons Licensed sounds. It has been maintained at the Music Technology Group (MTG) in Universitat Pompeu Fabra, Barcelona. The repository was launched in 2005 with an initial goal to provide a large royalty-free sound databases with sound researchers to test their algorithms~\cite{frederic2013}. Since then, it has widely adopted by sound artists, application developers and all sorts of content creators and became a standard website for sharing Creative Commons sounds.
 
 %Way of Browsing -> Information Retrieval
@@ -71,14 +73,14 @@ Freesound\footnote{https://freesound.org/} is a non-profit organization which ho
 \end{figure}
 
 
-\subsection{Content-based and context-based search \texttt{<in progress>}}
-% Context ... user-generated tags and descriptions
-% Content ... Audio data itself
-% What are the SoTA application examples from two approaches
+% \subsection{Content-based and context-based search \texttt{<in progress>}}
+% % Context ... user-generated tags and descriptions
+% % Content ... Audio data itself
+% % What are the SoTA application examples from two approaches
 
-Two underpinnings for audio retrieval are how audio data is represented (audio feature) and how data will presented to users. Before breaking down the two topics in the following sections, this section aims to provide readers with a context for the sound retrieval research, covering from historical examples to an example of popular real-world application, explaining emerging technological advancements which affect its future research directions.
+% Two underpinnings for audio retrieval are how audio data is represented (audio feature) and how data will presented to users. Before breaking down the two topics in the following sections, this section aims to provide readers with a context for the sound retrieval research, covering from historical examples to an example of popular real-world application, explaining emerging technological advancements which affect its future research directions.
 
-\subsection{Toward intelligent audio retrieval \texttt{<in progress>}}
+\subsection{Toward intelligent audio retrieval}
 So far, we have seen various efforts made in the research and development of efficient IR for multimedia information, focusing on audio. Speaking of audio retrieval, humans are inherently good at remembering/retrieving audio since we are born with a set of abilities to discriminate a wide range of sounds, especially in the context of speech. Moreover, we are also able to relate and match similar sounds~\cite{denise1995}. In fact, we have the capability to detect and relate sound events or “acoustic objects” which we have never encountered before, based on how that phenomenon stands out against the background~\cite{kumar2014}. To computers, however, a raw audio signal data is essentially a featureless collection of bytes with most rudimentary information embedded such as file name, format, and sampling rate. This does not readily allow efficient management and searches for sounds. To accomplish the task, we first need to transform sounds into a small set of parameters (audio features) and, in the next section, we will go into detail of various analysis techniques to achieve this goal. 
 
 \section{Audio Features} 
@@ -94,7 +96,8 @@ This section aims to offer a review about two general classes of audio features,
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=10cm]{Figures/low-to-high-features.png}
-	\caption{}
+	\caption{Classification of features into low-level, mid-level and high-level
+features as suggested in \cite{ramaseshan2013}. Low-level features are obtained from the audio content, while high-level features are symbolic representation of music.}
 	\label{low-to-high}
 \end{figure}
 
@@ -103,10 +106,11 @@ Pitch, loudness, and timbre are the acoustic features which are traditionally us
 
 \subsubsection{Pitch}
 % Copy-pasting
-\textit{Pitch} is a perceptual frequency-related scale estimated by taking a series of short-time Fourier spectra. For each of these frames, the frequencies and amplitudes of the peaks are measured and an approximate greatest common divisor algorithm is used to calculate an estimate of the pitch. In the following mathematical formulation, pitch is stored as a log frequency. A perfect young human ear can hear frequencies in the 20-Hz to 20-kHz range and most of the application are configured to identify pitch within this range as accurately as possible.
+\textit{Pitch} is a perceptual frequency-related scale estimated by taking a series of short-time Fourier spectra. For each of these frames, the frequencies and amplitudes of the peaks are measured and an approximate greatest common divisor algorithm is used to calculate an estimate of the pitch. A perfect young human ear can hear frequencies in the 20-Hz to 20-kHz range and most of the application are configured to identify pitch within this range as accurately as possible.
 
 \subsubsection{Loudness}
-Loudness is approximated by the signal's root-mean-square (RMS) level in decibels, which is calculated by taking a series of windowed frames of the sound and computing the square root of the sum of the squares of the windowed sample values.
+%That attribute of auditory sensation in terms of which sounds can be ordered on a scale extending from quiet to loud
+Loudness is an acoustic feature with which sounds can be ordered on a scale extending from quiet to loud, describing the subjective perception of sound pressure~\cite{sonn1073}.  It is approximated by the signal's root-mean-square (RMS) level in decibels, which is calculated by taking a series of windowed frames of the sound and computing the square root of the sum of the squares of the windowed sample values.
 
 \subsubsection{Timbre}
 % Timbre is everything not Pitch and Loudness
@@ -114,13 +118,13 @@ Loudness is approximated by the signal's root-mean-square (RMS) level in decibel
 %\subsubsection{Brightness \texttt{<in progress>}}
 %\subsubsection{Bandwidth \texttt{<in progress>}}
 
-\subsection{Symbolic features \texttt{<in progress>}}
+\subsection{Symbolic features}
 Unlike acoustic features which are commonly used to many different purposes, symbolic audio features are designed for a specific purpose and deeply reflected by application specifics. Figure~\ref{low-to-high} shows a class of popular audio features used in n Music Information Retrieval research, including both acoustic and symbolic features. Take an example of the high-level features, \textit{Score} and \textit{Piano Roll} are essential in applications such as melody analysis but not always required for other applications such as beat detection. This is why those are classified as high-level features from the \textit{Melodic} category.
 
-\subsection{Practical Feature Extraction}
-In the context of the typical audio engineering development, it is usual that a developer uses open-source libraries for feature extraction tasks instead of coding them from scratch. This is because feature extraction processes demand a very careful optimization to the extent that only a few experts can attain and, more importantly, there are a number of reputable open-source libraries available~\cite{mcfee2015, giannakopoulos2015, bullock2007}. Among them, Essentia~\cite{bogdanov2013} is an open-source audio analysis tool which powers the similarity search functionality of Freesound. This library supports an extensive collection of reusable algorithms for audio feature extractions as shown in the complete list\footnote{https://essentia.upf.edu/algorithms\_reference.html}. 
+\subsection{Feature Extraction in Practice}
+In the context of the typical audio engineering development, it is usual that a developer uses freely available software for feature extraction tasks instead of coding them from scratch. This is because feature extraction processes demand a very careful optimization to the extent that only those who have considerable expertise in can achieve and, more importantly, there are a number of reputable open-source libraries in this venue~\cite{mcfee2015, giannakopoulos2015, bullock2007}. Among them, Essentia~\cite{bogdanov2013} is an open-source audio analysis tool which powers the similarity search functionality of Freesound. This library supports an extensive collection of reusable algorithms for audio feature extractions as shown in the complete list\footnote{https://essentia.upf.edu/algorithms\_reference.html}. 
 
-As for low-level audio features, Essentia supports a multitude of features such as loudness, dynamic range, zero crossing rates, as well as many spectral-based features including MFCCs, spectral energy, and pitch salience. Furthermore, many other algorithms are distinctly categorized for specific applications, such as mood detection, key detection, melody extraction and audio fingerprinting, and each algorithm is regarded as a high-level feature extractor.
+As for low-level acoustic features, Essentia supports a multitude of features such as loudness, dynamic range, zero crossing rates, as well as many spectral-based features including MFCCs, spectral energy, and pitch salience. Furthermore, many other algorithms are distinctly categorized for specific applications, such as mood detection, key detection, melody extraction and audio fingerprinting, and each algorithm is regarded as a high-level feature extractor.
 
 \section{Deep Feature Learning}
 % How NN works for dimentionality reduction. It should be discussed already in the previous section that dimentionality reduction is one of the most important aspects in (traditional) feature extraction.
@@ -137,47 +141,43 @@ With its relative simplicity of implementation and superior performance, it has 
 
 The architecture of VGG model is specifically optimized for image classification tasks, however, the architecture has also gained popularity in the audio research field. Since spectrogram can be essentially treated as if a 2 dimensional vector like a grayscale image, a simple adaptation to an audio task is possible relatively easily by changing the input layer to a spectrogram input.
 
-\subsection{Case: AudioSet \texttt{<in progress>}}
+\subsection{Case: AudioSet}
 Sound representations  from AudioSet \cite{jort2017} use a spectrogram-based CNN architecture trained on a classification task.
 
-\subsection{Case: OpenL3 \texttt{<in progress>}}
+\subsection{Case: OpenL3}
 OpenL3~\cite{cramer2019} also uses a spectrogram-based CNN architecture but trained through self-supervised learning of audio-visual correspondence in videos.
 
-\subsection{Case: SoundNet \texttt{<in progress>}}
+\subsection{Case: SoundNet}
 About SoundNet and how it extracts features
 
 \section{Similarity Learning}
-Classification in machine learning is a supervised learning in which the computer program identifies to which of a set of categories a new observed data belongs, on the basis of a training set of examples consisting of pairs of instances and its category. Classification models have many applications and a variety of the trained models is already used in our everyday life, such as in image recognition [ref], semantic segmentation [ref], and e-mail spam filter [ref] which identifies an incoming e-mail to your inbox to be a spam or not. A lot of the audio features we discussed in the previous section were indeed all by-products of audio classification tasks such as environmental sound classification
+%Classification in machine learning is a supervised learning in which the computer program identifies to which of a set of categories a new observed data belongs, on the basis of a training set of examples consisting of pairs of instances and its category. Classification models have many applications and a variety of the trained models is already used in our everyday life, such as in image recognition\cite{szegedy2015, andrew2017}, speech recognition~\cite{yanzhang2018}, and e-mail spam filter~\cite{emmanuel2019}.
+In the previous section, we have seen four audio classification models and the use of those models for the production of audio features. Generally, these audio features are obtained as by-products of independent classification tasks such as environmental sound classification. While the approach has seen growing popularity and success, it comes with several drawbacks if it aims to make more expressive audio features.
 
-While classification learning enables a classifier to identify an observed data with a probability distribution over a set of categories (probabilistic classification), the task is performed without a measure of similarity, explaining how probable the new input belongs to a category but ignoring how similar it is to other data from the existing category. This missing particulars are crucial to feature representations. This is because, with the learned feature representations, what we want to do in this work is not to use as an input for classification but to make use of it for better organization of information that audio features represent, grouping them in a way that looks coherent to human, dealing with data that are not observed in the training set of data.
+First, classification learning enables a classifier to identify an observed data with a probability distribution over a set of categories (probabilistic classification), but the task is performed without a measure of similarity. It explains how probable the new input belongs to a category but ignores how similar it is to other data from the existing category. This missing particulars are crucial to feature representations. This is because, with the learned feature representations, our goal in this work is to make use of it for better organization of information represented by audio features, grouping them in a way that looks coherent to human, dealing with data that are not observed in the training set of data.
 
-Similarity learning is also an area of supervised machine learning which is related closely related to classification but it considers similarity. The goal is to learn to estimate how similar a feature is to other features by optimizing a similarity function that measures a distance in the feature space. However, in spite of being specialized in similarity, a rich line of work has focused solely on features obtained as a by-product of classification learning and similarity learning did not enjoy much attention. For example, the idea of using neural networks to extract features that respect certain relationships dates back to the 90s. Siamese Networks~\cite{bromley1993} find an embedding space such that similar examples have similar embeddings and vice versa. However, it was not feasible to train such a neural network given the limited compute power at the time and their non-convex nature~\cite{chao2017}.
+Similarity learning is also an area of supervised machine learning, which is closely related classification approach~\cite{andrew2018}, but it considers similarity. The goal is to learn to estimate how similar a feature is to other features by optimizing a similarity function that measures a distance in the feature space. However, in spite of being specialized in similarity, a large body of work has focused solely on features trained with classification-based approaches and similarity learning did not enjoy much attention. For example, the idea of using neural networks to extract features that respect certain relationships dates back to the 90s. Siamese Networks~\cite{bromley1993} find an feature space such that similar examples have similar features and vice versa. However, it was not feasible to train such a neural network given the limited compute power at the time~\cite{chao2017}.
 
- With sufficient data, computational power, recent advancement in machine learning allowed for the training of Siamese architecture using triplet losses. Sampling strategy, appropriate distance metric, and the structure of the network are the challenging factors for researchers to improve the performance of the network model.  In this section, while several ideas and implementations regarding similarity learning are introduced, our focus lies at the details of the architecture based on triplet loss.
+With sufficient data, computational power, recent advancement in machine learning allowed for the training of Siamese architecture. Sampling strategy, appropriate distance metric, and the structure of the network are the challenging factors for researchers to improve the performance of the network.  In this section, we introduce several principles and methods regarding similarity learning, giving special importance to the details of the architecture based on triplet loss.
+
+\subsection{Learning Approach}
+\subsubsection*{Supervised Learning}
+\subsubsection*{Weakly Supervised Learning}
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=13cm]{Figures/overview_deep_embedding.png}
+	\includegraphics[width=13cm]{Figures/learning_scheme.png}
 	\caption{\texttt{\textbf{Similar architecture for audio application will be shown}}}
 	\label{deep-model}
 \end{figure}
 
-\subsection{Learning Approach \texttt{<in progress>}}
-\subsubsection*{Supervised Learning \texttt{<in progress>}}
-\subsubsection*{Weakly Supervised Learning \texttt{<in progress>}}
-\subsection{Triplet \texttt{<in progress>}}
-\subsection{Mining Strategy}
- It is known that choosing which triplets to use are essential for achieving good generalization in similarity learning \cite{FaceNet}. For example, a network will not be trained well when it is fed with many easy triplets (a pair of highly distinct categories). Also, when triplet loss is used with a large amount of data, the number of possible combination of triplets easily explodes. To solve this problem, we need to formulate triplet mining strategy which ensures the difficulty of triplets  while keeping semantics and train a deep neural network to learn diverse sound representations. 
+\subsection{Triplet Mining}
+It is known that choosing (mining) which triplets to use are essential for achieving good generalization in similarity learning~\cite{schroff2015}. The importance of triplet mining is intuitively and concisely given in~\cite{hermans2017} while focusing on person re-identification tasks. Borrowing the idea and putting it in the context of audio retrieval, it can be described as follows: telling over and over again that sounds with different acoustic properties are different sounds does not teach the model anything, whereas listening to similarly-sounding but different sounds (hard negatives), or wildly different sounds of the same category (hard positives) dramatically helps understanding the concept of “sound category”. 
 
+%MOVE
+The idea to use hardest examples is critical but it may lead to local minima early in the training~\cite{schroff2015}. To address this concern, a workaround is commonly applied, which is considered as "moderate" since it finds the hardest examples from a small batch instead of the hardest one in the dataset~\cite{hermans2017, yesiler2020}.
 
-\subsubsection*{Hard Mining \texttt{<in progress>}}
-
-\subsubsection*{Random Mining \texttt{<in progress>}}
-
-\subsection{Case: FaceNet \texttt{<in progress>}}
-In face recognition, triplet loss is used to learn good embeddings of faces.
-
-\subsection{Triplets using tags \texttt{<in progress>}}
+Also, when triplet loss is used with a large amount of data, the number of possible combination of triplets easily explodes. To solve these problems, we need to formulate triplet mining strategy which ensures the difficulty of triplets 
 
 \section{Clustering}
 Our work strives for shift from the traditional audio retrieval to a more knowledgeable approach which provides users with content-based relationships between sounds to access what they look for. The new intelligent way of audio retrieval is analogous to the process of knowledge acquisition. 
