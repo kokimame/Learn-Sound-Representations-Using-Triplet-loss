@@ -1,39 +1,54 @@
 
 \chapter{Results}
 
-This is an example paragraph. As you can see, the main text uses a font size of 12 pt and a line spacing of 1.5. Neither the paragraphs nor the first lines of paragraphs should be indented.
+\section{Objective Result}
+\subsection{Without semihard mining}
+\begin{itemize}
+    \item The distance to the farthest positive stays farther than the one to the closest negative
+    \item Possibly due to the outliers in positive instances
+\end{itemize}
 
-There is no very strict page limit. Your number of pages will be strongly influenced by the size and total number of your figures and tables. It is recommended staying within 30-50 pages. Do not try to fill as many pages as you can. Longer theses are not necessarily of higher quality and of more non-redundant content than shorter theses. Certainly, a master thesis of 15 pages is too short, and a master thesis of 100 pages is too long.
-
-\section{Tables and graphics}
-
-This is an example paragraph. As you can see, the main text uses a font size of 12 pt and a line spacing of 1.5. Neither the paragraphs nor the first lines of paragraphs should be indented.
-
-There is no very strict page limit. Your number of pages will be strongly influenced by the size and total number of your figures and tables. It is recommended staying within 30-50 pages. Do not try to fill as many pages as you can. Longer theses are not necessarily of higher quality and of more non-redundant content than shorter theses. Certainly, a master thesis of 15 pages is too short, and a master thesis of 100 pages is too long.
-
- \begin{figure}[!ht]
-  \includegraphics[clip,width=\columnwidth]{Figures/PlotTimeSeriesResult}% 
-\caption{This is an example of a figure and its caption.}
-\label{fig:timeseries}
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=15cm]{Figures/bad_distance.png}
+	\caption{The distance to the farthest positive stays farther than the one to the closest negative.}
+	\label{bad_distance}
 \end{figure}
 
-\begin{table}[!ht]
-\renewcommand{\arraystretch}{1.50}
-\caption{This is an example of a table and its caption.}
-\label{tablePCA}
-\centering
-\begin{tabular}{| c | c |}
-\hline
-\bfseries PCA & \bfseries Residual mean (in absolute values) \\
-\hline\hline
-Original PCA & 0.1267  \\
-\hline
-PCA on Centroid 1 & 0.1249\\
-\hline
-PCA on Centroid 2 & 0.1214  \\
-\hline
-\end{tabular}
-\end{table}
+\subsection{With semihard mining}
+\begin{itemize}
+    \item Trouble addressed by the use of semi-hard mining. Picking a random positive instead of the farthest while using the closest negative
+\end{itemize}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=15cm]{Figures/good_distance.png}
+	\caption{The distance to the farthest positive becomes closer than the the closest negative on average during the training (with the small dataset)}
+	\label{good_distance}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=15cm]{Figures/good_semihard_result.png}
+	\caption{Left: the rank of positive instances gets lower and lower on average. This means positive instances are projected on closer positions to the anchor instance. Right: mAP (mean average score) increases over the training (with the small dataset)}
+	\label{good_distance}
+\end{figure}
+
+\section{Subjective Result}
+
+\begin{itemize}
+    \item Used the trained model analyzed above to produce audio representations of unseen sounds.
+    \item Compared the visualization with OpenL3~\cite{cramer2019} and VGGish model trained with AudioSet ontology~\cite{jort2017}
+    \item Applied PCA 2D to the obtained audio representations and visualized them in 2D space
+\end{itemize}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=15cm]{Figures/emb_examples.png}
+	\caption{Left: Ours (dim 512), Middle: OpenL3 (dim 6114), Right: AudioSet (dim 128) }
+	\label{emb_examples}
+\end{figure}
+
 
 \newpage
 

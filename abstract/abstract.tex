@@ -3,10 +3,19 @@
 \begin{abstract}
 \pagenumbering{gobble}
 
-The abstract should have at least 200 but not more than 600 words. Placed on a right page next to a blank left page. A list of keywords (approximately 3 to 5) should be just below the abstract, preceded by the word "Keywords". Keywords should be separated by ";".
+Sound representation plays important role in many audio applications, including content-based audio retrieval and audio clustering. Good sound representations are so expressive that two audio recordings, which are similar in some sense (e.g. acoustically and/or semantically), can be matched through the representations while keeping its size compact enough for faster computation. Recent studies have demonstrated that the data-driven approach such as feature learning based on neural network is possible to learn this low-dimensional and expressive representations with the help of large sound collections. However, the performance of popular approaches using neural network is restricted with some factors, such as the number of the labels in associated with sounds that limits expressiveness, and the cost of sound data annotation.  
+%The advantage of this approach is to remove the need for the predefined set of the labels (taxonomy) and to enable the flexible use of semantics content of the labels.
+
+In this work, we introduce our learning approach that aims to overcome these limiting factors by employing the triplet-loss learning strategy. Our approach, named OpenFSE (Freesound embedding), does not require the predefined set of the labels. This allows to make the full use of online sound collections such as acoustic and semantic data available on Freesound.org, which is one of the largest collections of human-labelled sounds. Methodologically, unlike optimizing sound representations by training classifiers, we directly optimize sound representations in its feature space.  Furthermore, we propose the use of semantic vectors of the labels in the loss function (margin adaptation) so that our sound representations become more semantically rich.
+
+Experimental results show that the sound representations that are trained with margin adaptation outperformed the ones without it in regards to both discriminative and clustering tasks. Additionally, we report the possible solution to scale our current experiments to the larger dataset with the use of semantic vectors.
+
+Our code for this project is available on GitHub: \url{https://github.com/kokimame/OpenFSE}
+
+Additional tool to visualize audio representations with audio-playing feature is available on GitHub: \url{https://github.com/kokimame/tensoba}
 
 \bigskip
-Keywords: Imaging techniques; Cloud computing; Alzheimer
+Keywords: Sound representation, Similarity learning, Triplet loss
 
 
 \newpage

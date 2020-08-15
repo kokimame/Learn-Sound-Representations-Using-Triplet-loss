@@ -13,11 +13,9 @@ More specifically, with our proposed methodology, we contribute to the research 
 To achieve this, we think of two independent issues which are equally important: the way of representing sounds (production of audio features) and the way of presenting sounds based on the given representation (clustering approach). We discuss these two issues in the context of an information retrieval process.% which begins when a user enters a query for sounds into the system and finds matching objects. There is no doubt that such a system greatly helps people's search for digital sounds on the internet which is increasingly daunting because of the information overload we discussed in the last chapter.
 
 
-The following sections offer a collection of the most up-to-date work and ideas regarding audio retrieval and not be filled with a mere assortment of details about related new techniques. We give a special importance to the context of why an effort of research or development was made and what problem did it try to address. In this way, we might have to give up some trivial facts and details of the topic, but we believe it is inevitable so that readers can focus on a contiguous progression of previous development toward our proposed method in the next chapter. Each of the following sections is dedicated to a fundamental technique of our methodology. 
-%Therefore, readers can get to know the state-of-the-art of each technique and, by the end of chapter, will be all ready for the discussion of our experiments and analysis.
-
-%to understand how seamlessly our work aims to advance from the current state-of-the-art.
-
+The following sections offer a collection of the most up-to-date work and ideas regarding audio retrieval.
+%We give a special importance to the context of why an effort of research or development was made and what problem did it try to address. In this way, we might have to give up some trivial facts and details of the topic, but we believe it is inevitable so that readers can focus on a contiguous progression of previous development toward our proposed method in the next chapter. 
+Each of the following sections is dedicated to a fundamental technique of our methodology. 
 The rest of this chapter is organized as follows: in the next section, we discuss the most general topic of our research: information retrieval, focusing on its connection to sound and music computing instead of going into detail of applications with non-audio information. Then, in Section 2, a class of traditional audio features, the building blocks of audio retrieval, are introduced. In Section 3, we cover the audio features that are recently developed with the help of deep learning. Then, among those new kind of features, we focus on those learned from similarity learning and discuss its practical use for sound retrieval in Section 4. In Section 5, a review of clustering methods is presented with the focus on two popular approaches, the partitional clustering and the graph-based clustering. Due to the large volume and many topics to be covered, Figure~\ref{toc-figrue} visualizes the thematic structure of the following sections and allows readers to focus on specific topics.
 
 \begin{figure}[htb]
@@ -129,14 +127,29 @@ As for low-level acoustic features, Essentia supports a multitude of features su
 \section{Deep Feature Learning}
 % How NN works for dimentionality reduction. It should be discussed already in the previous section that dimentionality reduction is one of the most important aspects in (traditional) feature extraction.
 
-As introduced in the last section, traditional approaches which more or less require audio-specific domain knowledge were dominant in this field. However, recently, the use of deep learning has seen growing popularity and success because the new approach replaces laborious feature engineering with automated feature learning.
-With deep learning approaches, audio features are often a byproduct of automated feature learning unlike predefined features as we have seen in the traditional approaches.  In this section, we go into detail of recent advancements in machine learning research in the context of audio feature learning. We discuss how it can be used to produce more expressive audio representations for audio information retrieval.
+As introduced in the last section, traditional approaches which more or less require audio-specific domain knowledge were dominant in this field. However, recently, the use of deep learning has seen growing popularity and success. The new approach replaces laborious feature engineering in the past with automated feature learning powered by the use of neural networks. The application of deep learning techniques for the purpose of feature extraction is known as deep feature learning or deep representation learning. In this section, we go into detail of recent advancements in machine learning research in the context of audio feature learning.
 
-%\subsection{Neural Network}
+\subsection{Neural Network}
+
+Neural networks are computing systems vaguely inspired by the biological neural networks that constitute animal brains [1, Wikipedia]. Neural network is known to be able to powerfully model a highly non-linear relationship between its input and output. The training of such models can be mainly divided into two phases: training and backpropagation. Here, we refer to supervised learning approach as an example of the training of neural networks. To understand the variation of the approaches to train neural networks, readers are recommended to refer to [[this]]
+
+As similar to the electric signals passing through each connection (synapses) and edges (neurons) in animal brains, each edges in neural networks receives a real number (signal) and apply non-linear process to it, then signal to other connected edges. At the end of the network, the neural model make outputs (often a prediction). The error of the training is computed by comparing the outputs with the target outputs. 
+
+After computing the error for an input, the network propagates the error to the entire network from back to the front. This propagation of the error from the output layer to the input layer is known as backpropagation. During backpropagation, the network then adjusts its weighted connections according to a learning rule, such as learning rate that defines the scale of the error at given adjustments. Successive adjustments will cause the neural network to produce output which is increasingly similar to the target output. After a sufficient number of these adjustments the training can be terminated based upon certain criteria.
+
+\subsection{Convolutional Network}
+From the most simplest network such as feed-forward network to the recurrent neural network such as LSTM, there are many variations of neural networks in terms of its topological differences [Topology of a Neural Network, Splingerfield].
+
+Regarding to deep feature learning for audio applications, convolutional neural network (CNN) is one of the most standard architecture. CNN is initially developed for computer vision tasks but
+
+\subsection{Strategy of Deep Feature Learning}
+There are three common strategies that facilitates the learning of sound representations. Different strategies are suitable for different experimental settings, e.g., the size of the dataset available. In the following sections, we first describe the classic classification-based strategy that relies on classification tasks and uses the trained classifier as an extractor of sound representations. Then, it is followed by the self-supervised learning strategy that employs contextual constraints between audio and another modal, such as audio-visual correspondence in a video. Finally, we introduce the similarity learning strategy, which is the choice of our work, that optimizes sound representations directly in its feature space.
+
+\subsection{Classification-based Strategy}
 
 \subsection{VGG}
 VGG is a Convolutional Neural Network architecture proposed by Karen Simonyan and Andrew Zisserman of Oxford Robotics Institute in 2014~\cite{simonyan2015}. It was submitted to Large Scale Visual Recognition Challenge 2014 (ILSVRC2014) and the model achieves 92.7\% top-5 test accuracy in ImageNet.
-Originally, the VGG model takes an RGB image as input and passe the image through a stack of convolutional layers, where the filters are used with a very small receptive field: 3x3 (which is the smallest size to capture the notion of left/right, up/down, and center). At each layer, the results are followed by non-linear activation and max-pool. Max-pooling is performed over a 2x2 pixel window, with stride 2. The objective of max-pooling is to down-sample an image representation, reducing its dimensionality and allowing for genelization of the input representation in a lower dimension.
+Originally, the VGG model takes an RGB image as input and passe the image through a stack of convolutional layers, where the filters are used with a very small receptive field: 3x3 (which is the smallest size to capture the notion of left/right, up/down, and center). At each layer, the results are followed by non-linear activation and max-pool. Max-pooling is performed over a 2x2 pixel window, with stride 2. The objective of max-pooling is to down-sample an image representation, reducing its dimension and allowing for generalization of the input representation in a lower dimension.
 With its relative simplicity of implementation and superior performance, it has became one of the standard baseline models in the computer vision research.
 
 The architecture of VGG model is specifically optimized for image classification tasks, however, the architecture has also gained popularity in the audio research field. Since spectrogram can be essentially treated as if a 2 dimensional vector like a grayscale image, a simple adaptation to an audio task is possible relatively easily by changing the input layer to a spectrogram input.
@@ -180,14 +193,14 @@ The idea to use hardest examples is critical but it may lead to local minima ear
 Also, when triplet loss is used with a large amount of data, the number of possible combination of triplets easily explodes. To solve these problems, we need to formulate triplet mining strategy which ensures the difficulty of triplets 
 
 \section{Clustering}
-Our work strives for shift from the traditional audio retrieval to a more knowledgeable approach which provides users with content-based relationships between sounds to access what they look for. The new intelligent way of audio retrieval is analogous to the process of knowledge acquisition. 
-Essentially, knowledge acquisition is the process of storing new information in memory in a way that it can be efficiently retrieved later~\cite{danielle2002}. The efficiency of this process depends heavily on the representation quality of the information and also how they are organized in the storage. Take for instance, language acquisition is not only about memorizing a large vocabulary but what's also important is the organization of such information, grouping vocabulary 0by semantic similarity (synonyms) or putting them in a context with sentences.
+From an application perspective, our work strives for shift from the traditional audio retrieval to a more knowledgeable approach which provides users with content-based relationships between sounds to access what they look for. The new intelligent way of audio retrieval is analogous to the process of knowledge acquisition. 
+Essentially, knowledge acquisition is the process of storing new information in memory in a way that it can be efficiently retrieved later~\cite{danielle2002}. The efficiency of this process depends largely on the representation quality of the information and also how they are organized in the storage. Take for instance, language acquisition is not only about memorizing a large vocabulary but what's also important is the organization of such information, grouping vocabulary by semantic similarity (synonyms) or putting them in a context with sentences.
 
-So far, we have seen the recent advancements in the studies that aim to convert featureless audio signal into a expressive but compact representation of the acoustic information. We concluded in the last section that audio features learned with similarity learning are the most suitable for our purposes. At this point, what's left is choosing an approach for organization which is appropriate for our tasks and the nature of the information we use. With the method of organization, we additionally need to design an intuitive interface through which one can browse sounds and retrieve what he or she looks for.
+So far, we have seen the recent advancements in the studies that aim to convert featureless audio signal into a expressive but compact representation of the acoustic information. We concluded in the last section that audio features learned with similarity learning are the most suitable for our purposes. In this section, we discuss the later part, clustering: the task of organizing a set of objects in such a way that objects in the same group (called a cluster) are more similar (in some sense) to each other than to those in other groups (clusters).
 
-In our work, we are interested in audio features which are the informational representation of audio data and constructed exclusively on a basis of similarity among sound samples. Therefore, it is reasonable to organize such information in a way that puts similar objects closer and distant ones more distant. In this way, the presented group of audio features resembles what is knowledge in aforementioned knowledge acquisition process. Mathematically speaking, such algorithm belongs to a class of the cluster analysis which requires a distance function so that it measures the distance between objects (audio features).
+In our work, we are interested in audio features which are the informational representation of audio data and constructed exclusively on a basis of similarity among sound samples. Therefore, it is reasonable to organize such information in a way that puts similar objects closer and distant ones more distant. In this way, the presented group of audio features resembles knowledge in aforementioned knowledge acquisition process. Mathematically speaking, such algorithm belongs to a class of the cluster analysis which requires a distance function so that it measures the distance between objects (audio features).
 
-In this section, we introduce a number of clustering analysis techniques, giving a special importance to the partitional approaches. Before breaking into a specific clustering algorithms, we review the use of clustering algorithms in the context of information retrieval. Specifically, we discuss search result clustering which is an integral part of our research and provide an several review of previous applications in the field.
+In this section, we introduce k-Means clustering and adjusted rand index which is the procedure and measure we used to evaluate the clustering performance based on our learned features. Before moving to a specific method, we review the use of clustering algorithms in the context of information retrieval. Specifically, we discuss search result clustering which is an integral part of our research and provide an several review of previous applications in the field.
 
 \subsection{Search Result Clustering}
 Search Result Clustering (SRC) is a challenging algorithmic task that requires partitioning the results returned by search engine into classes. This process of partitioning is called Clustering. More specifically, it is a process of organizing similar search results into the same cluster so that each result belongs to a coherent and thematic cluster. Usually, when a traditional search engine is given an ambiguous query, the search engine tries to satisfy this query with high recall, meaning it returns many results which are not necessarily relevant to the user's information need~\cite{ugo2012}. SRC assists users in such a situation, allowing them to look through the clusters of relevant topics without refomulating the query.
@@ -203,7 +216,7 @@ Many approaches to obtain audio features were already introduced in the last sec
  The interesting research topic is how the difference in audio features influence the performance of the clustering tasks. This is because clustering approaches we will discuss in the following sections, makes full use of given audio features for clustering unlike a classification task in which a model learns to get rid of irrelevant information from given representations. This also indicates the quality of the representation is crucial to the performance of the clustering process. %Specifically, we focus on Search Result Clustering \cite{Carpineto2013} in the context of online audio collections which use sound representations to organize search-result audio content into coherent groups in the context.
  
  
-\subsection{Partitional Clustering}
+\subsection{k-Means Clustering}
 Partitional clustering is a class of clustering methods that require the number of clusters to be defined before starting the process. K-means clustering is the most popular implementation of the partitional approach and it aims to partition $n$ observations into $k$ clusters in which each observation belongs to the cluster with the nearest means (cluster centers or cluster centroid).
 
 \begin{figure}[htb]
@@ -213,12 +226,8 @@ Partitional clustering is a class of clustering methods that require the number 
 	\label{kmeans-diagram}
 \end{figure}
 
-\subsection{Graph-based Clustering}
+\subsection{Adjusted Rand Index}
 
-\subsection{Self-organizing Map}
-
-\subsection{Evaluation of Clustering Quality}
-About mAP, MRR, MR, Top1, Top10, metric
 
 
 \newpage
